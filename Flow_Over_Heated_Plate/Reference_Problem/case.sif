@@ -114,22 +114,6 @@ Solver 3
  Linear System Convergence Tolerance = 1.0e-10
 End
 
-Solver 4
-    Equation = "ReadData"
-    Procedure = "../Coupler_Solver.so" "CouplerSolver"
-    readDataName = String "Temperature"
-    writeDataName = String "temperature flux 2"
-    Exec Solver = before timestep 
-End
-
-Solver 5
-    Equation = "WriteDataAdvance"
-    Procedure = "../Coupler_Solver.so" "CouplerSolver"
-    readDataName = String "Temperature"
-    writeDataName = String "temperature flux 2"
-    Exec Solver = after timestep 
-End
-
 Equation 1
   Name = "Navier_Stokes_Heat"
   Convection = Computed
@@ -182,7 +166,7 @@ End
 Boundary Condition 2
   Target Boundaries(1) = 6 
   Name = "Inlet"
-  Velocity 1 = 0.1
+  Velocity 1 = 1
   Temperature = 300
 End
 
@@ -196,7 +180,6 @@ Boundary Condition 4
   Target Boundaries(1) = 5
   Name = "Coupling_boundary"
   Noslip wall BC = True
-  Coupler Interface = Logical True 
 End
 
 Boundary Condition 5
@@ -207,6 +190,5 @@ End
 
 Boundary Condition 6
   Target Boundaries(1) = 4
-  Name = "Plate_Sides"
-  
+  Name = "Plate_Sides"  
 End
