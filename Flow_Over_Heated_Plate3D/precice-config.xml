@@ -49,8 +49,8 @@
 
   <coupling-scheme:serial-explicit>
     <participants first="Solid" second="Fluid"/>
-    <max-time value="10.0"/>
-    <time-window-size value="0.1"/>
+    <max-time value="50.0"/>
+    <time-window-size value="0.5"/>
     <exchange data="Heat-Flux" mesh="Solid-Mesh" from="Solid" to="Fluid" />
     <exchange data="Temperature" mesh="Fluid-Mesh" from="Fluid" to="Solid" initialize="yes" />
   </coupling-scheme:serial-explicit>

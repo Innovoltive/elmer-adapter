@@ -47,21 +47,21 @@ for s in surfaces:
 # add all the walls to a physical group
 model.addPhysicalGroup(2, walls, tag=-1, name="Fluid_Walls")
 # add a filed size limit for the coupling inter
-dis_f_interface = gmsh.model.mesh.field.add("Distance")
-gmsh.model.mesh.field.setNumbers(dis_f_interface, "SurfacesList", [coupling_interface[1]])
-gmsh.model.mesh.field.setNumber(dis_f_interface, "Sampling", 100)
-lc_min = 0.1
-lc_max = 1
-dist_min = 0.2
-dist_max = 1
-th_f_interface = gmsh.model.mesh.field.add("Threshold")
-gmsh.model.mesh.field.setNumber(th_f_interface, "InField", dis_f_interface)
-gmsh.model.mesh.field.setNumber(th_f_interface, "SizeMin", lc_min)
-gmsh.model.mesh.field.setNumber(th_f_interface, "SizeMax", lc_max)
-gmsh.model.mesh.field.setNumber(th_f_interface, "DistMin", dist_min)
-gmsh.model.mesh.field.setNumber(th_f_interface, "DistMax", dist_max)
-gmsh.model.mesh.field.setNumber(th_f_interface, "StopAtDistMax", 1)
-gmsh.model.mesh.field.setAsBackgroundMesh(th_f_interface)
+# dis_f_interface = gmsh.model.mesh.field.add("Distance")
+# gmsh.model.mesh.field.setNumbers(dis_f_interface, "SurfacesList", [coupling_interface[1]])
+# gmsh.model.mesh.field.setNumber(dis_f_interface, "Sampling", 100)
+# lc_min = 0.1
+# lc_max = 1
+# dist_min = 0.2
+# dist_max = 1
+# th_f_interface = gmsh.model.mesh.field.add("Threshold")
+# gmsh.model.mesh.field.setNumber(th_f_interface, "InField", dis_f_interface)
+# gmsh.model.mesh.field.setNumber(th_f_interface, "SizeMin", lc_min)
+# gmsh.model.mesh.field.setNumber(th_f_interface, "SizeMax", lc_max)
+# gmsh.model.mesh.field.setNumber(th_f_interface, "DistMin", dist_min)
+# gmsh.model.mesh.field.setNumber(th_f_interface, "DistMax", dist_max)
+# gmsh.model.mesh.field.setNumber(th_f_interface, "StopAtDistMax", 1)
+# gmsh.model.mesh.field.setAsBackgroundMesh(th_f_interface)
 
 # limit the mesh size
 gmsh.option.setNumber("Mesh.MeshSizeMax", 0.5)
