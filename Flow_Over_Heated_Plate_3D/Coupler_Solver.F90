@@ -159,6 +159,7 @@ MODULE HelperMethods
             j = BoundaryPerm(i)
             IF(j == 0) CYCLE
             copyData(j) = dataVariable % Values(dataVariable % Perm(i))
+            ! copyData(j) = 300
             ! IF( dataName == "temperature loads") THEN
             !     copyData(j) = -1 * dataVariable % Values(dataVariable % Perm(i)) 
             ! ELSE
@@ -365,7 +366,7 @@ SUBROUTINE CouplerSolver( Model,Solver,dt,TransientSimulation)
 
         CALL CopyReadData(readDataName,mesh,BoundaryPerm,readData)
         CALL Info('CouplerSolver','Printing the read data(From Precice to Elmer)')
-        ! CALL Print(readDataName,mesh ,BoundaryPerm,CoordVals)
+        CALL Print(readDataName,mesh ,BoundaryPerm,CoordVals)
         !-----------------------------------------------------------------------------------------
 
         itask = 3
@@ -373,7 +374,7 @@ SUBROUTINE CouplerSolver( Model,Solver,dt,TransientSimulation)
         !-------------------Copy Write values from Variable to buffer----------------------------
         CALL CopyWriteData(writeDataName,mesh,BoundaryPerm,writeData)
         CALL Info('CouplerSolver','Printing the write data (From Elmer to Precice)')
-        ! CALL Print(writeDataName,mesh ,BoundaryPerm,CoordVals)
+        CALL Print(writeDataName,mesh ,BoundaryPerm,CoordVals)
 
         !-------------------Sticking Precice Naming Convention-------------------------------------
         IF (writeDataName == 'temperature') THEN

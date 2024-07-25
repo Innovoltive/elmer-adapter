@@ -14,8 +14,8 @@ Simulation
   Output Intervals = 1
   Timestepping Method = BDF
   BDF Order = 2
-  Timestep intervals = 500
-  Timestep Sizes = 0.5
+  Timestep intervals = 5000
+  Timestep Sizes = 0.01
   Solver Input File = case.sif
   Post File = Solid.vtu
   Use Mesh Names = Logical True
@@ -138,7 +138,7 @@ End
 Boundary Condition 1
   !Target Boundaries(1) = 2
   Name = "Plate_Bottom"
-  Temperature = 390
+  Temperature = 301
 End
 
 Boundary Condition 2

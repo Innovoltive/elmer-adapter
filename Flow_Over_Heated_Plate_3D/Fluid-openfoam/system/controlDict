@@ -1,0 +1,73 @@
+FoamFile
+{
+	class	dictionary;
+	format	ascii;
+	location	system;
+	object	controlDict;
+	version	2.0;
+}
+application     buoyantPimpleFoam;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         50;
+
+deltaT          0.1;
+
+writeControl    runTime;
+
+writeInterval   1;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable false;
+
+// functions
+// {
+//     preCICE_Adapter
+//     {
+//         type preciceAdapterFunctionObject;
+//         libs ("libpreciceAdapterFunctionObject.so");
+//     }
+// }
+// application	buoyantSimpleFoam;
+// deltaT	1;
+// endTime	1000;
+// purgeWrite	2;
+// startFrom	latestTime;
+// startTime	0;
+// stopAt	endTime;
+// timeFormat	general;
+// timePrecision	6;
+// writeControl	timeStep;
+// writeInterval	10;
+// writePrecision	7;
+// runTimeModifiable	true;
+// compression	uncompressed;
+// timeFormat	general;
+// timePrecision	6;
+// writeFormat	binary;
+// writePrecision	7;
+
+// functions
+// {
+//     preCICE_Adapter
+//     {
+//         type preciceAdapterFunctionObject;
+//         libs ("libpreciceAdapterFunctionObject.so");
+//     }
+// }
