@@ -1,0 +1,2 @@
+When printing, the number of floating points needs to be increased in the Coupler_Solver.F90
+from F10.2 to F10.6
