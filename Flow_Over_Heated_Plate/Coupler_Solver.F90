@@ -208,11 +208,11 @@ SUBROUTINE CouplerSolver( Model,Solver,dt,TransientSimulation)
     TYPE(Variable_t), POINTER :: TimeVar
     Real(KIND=dp) :: Time
 
-    !--------------------------Precice-Variables-------------------------------------
+    !--------------------------preCICE-Variables-------------------------------------
     !-------------------------Strings----------------------------------------------
     CHARACTER(LEN=MAX_NAME_LEN)         :: config
     CHARACTER(LEN=MAX_NAME_LEN)         :: participantName, meshName
-    CHARACTER(LEN=MAX_NAME_LEN)         :: readDataName,writeDataName
+    CHARACTER(LEN=MAX_NAME_LEN)         :: readDataName, writeDataName
 
     !-------------------------IDs-Integer----------------------------------------------
     INTEGER                         :: meshID,readDataID, writeDataID, meshDim
@@ -243,7 +243,6 @@ SUBROUTINE CouplerSolver( Model,Solver,dt,TransientSimulation)
     Mesh => Solver % Mesh
     solverParams => GetSolverParams()
     meshDim = Mesh % MaxDim
-    ! PRINT *, 'Mesh dimension is:', meshDim  
     
     rank = 0
     commsize = 1
@@ -251,14 +250,14 @@ SUBROUTINE CouplerSolver( Model,Solver,dt,TransientSimulation)
     case(1)
         CALL Info('CouplerSolver ', 'Initializing Coupler Solver')
         !--- First Time Visited, Initialization
-        !-- First Time Visit, Create Precice, create nodes at interface
+        !-- First Time Visit, Create preCICE, create nodes at interface
         !----------------------------- Initialize---------------------
         
         !----------------Acquire Names for solver---------------------
         BoundaryName = GetString( Simulation, 'maskName', Found )
         participantName = GetString( Simulation, 'participantName', Found )
         
-        !-----------------Convert to Precice Naming Convention    
+        !-----------------Convert to preCICE Naming Convention    
         IF (participantName == 'solid') THEN
             participantName = 'Solid'
         END IF
@@ -278,7 +277,8 @@ SUBROUTINE CouplerSolver( Model,Solver,dt,TransientSimulation)
         config = GetString( Simulation, 'configPath', Found )
 
         Print *, TRIM(BoundaryName)," ",TRIM(participantName)," ",TRIM(meshName)," ",TRIM(config)
-         !-----------Identify Vertex on Coupling Interface & Save Coordinates--------------------
+        
+        !-----------Identify Vertex on Coupling Interface & Save Coordinates--------------------
         NULLIFY( BoundaryPerm )    
         ALLOCATE( BoundaryPerm( Mesh % NumberOfNodes ) )
         BoundaryPerm = 0
@@ -309,11 +309,11 @@ SUBROUTINE CouplerSolver( Model,Solver,dt,TransientSimulation)
         CALL CreateVariable(writeDataName,'writeDataName',mesh,BoundaryPerm,Solver,solverParams)
         !-----------------------------------------------------------------------------------------
 
-        ! !---------------Initializing Precice------------------------------------------ 
-        CALL Info('CouplerSolver','Initializing Precice')     
+        ! !---------------Initializing preCICE------------------------------------------ 
+        CALL Info('CouplerSolver','Initializing preCICE')     
         CALL precicef_create(participantName, config, rank, commsize)
         
-        CALL Info('CouplerSolver','Setting up mesh in Precice')
+        CALL Info('CouplerSolver','Setting up mesh in preCICE')
         CALL precicef_get_mesh_dimensions(meshName, dimensions)
         CALL precicef_set_vertices(meshName, BoundaryNodes, CoordVals, vertexIDs)
         ALLOCATE(readData(BoundaryNodes*dimensions))
@@ -351,10 +351,10 @@ SUBROUTINE CouplerSolver( Model,Solver,dt,TransientSimulation)
             WRITE (*,*) 'No reading iteration checkpoint required'
         ENDIF
         
-        CALL Info('CouplerSolver ', 'Readinging the data from Precice')    
+        CALL Info('CouplerSolver ', 'Readinging the data from preCICE')    
         CALL precicef_get_max_time_step_size(dt)
         
-        !-------------------Sticking Precice Naming Convention-------------------------------------
+        !-------------------Sticking preCICE Naming Convention-------------------------------------
         IF (readDataName == 'temperature') THEN
             CALL precicef_read_data(meshName, 'Temperature', BoundaryNodes, vertexIDs, dt, readData)
         ELSE IF (readDataName == 'temperature flux_abs') THEN
@@ -364,18 +364,15 @@ SUBROUTINE CouplerSolver( Model,Solver,dt,TransientSimulation)
         END IF
 
         CALL CopyReadData(readDataName,mesh,BoundaryPerm,readData)
-        CALL Info('CouplerSolver','Printing the read data(From Precice to Elmer)')
-        ! CALL Print(readDataName,mesh ,BoundaryPerm,CoordVals)
         !-----------------------------------------------------------------------------------------
 
         itask = 3
     case(3)
+
         !-------------------Copy Write values from Variable to buffer----------------------------
         CALL CopyWriteData(writeDataName,mesh,BoundaryPerm,writeData)
-        CALL Info('CouplerSolver','Printing the write data (From Elmer to Precice)')
-        ! CALL Print(writeDataName,mesh ,BoundaryPerm,CoordVals)
 
-        !-------------------Sticking Precice Naming Convention-------------------------------------
+        !-------------------Sticking preCICE Naming Convention-------------------------------------
         IF (writeDataName == 'temperature') THEN
             CALL precicef_write_data(meshName, 'Temperature', BoundaryNodes, vertexIDs, writeData)
         ELSE IF (writeDataName == 'temperature flux_abs') THEN
@@ -385,7 +382,7 @@ SUBROUTINE CouplerSolver( Model,Solver,dt,TransientSimulation)
         END IF
 
         
-        !-------------------Advance Precice-------------------------------------------------------
+        !-------------------Advance preCICE-------------------------------------------------------
         CALL precicef_advance(dt)
         CALL precicef_is_coupling_ongoing(ongoing)
         
@@ -397,7 +394,7 @@ SUBROUTINE CouplerSolver( Model,Solver,dt,TransientSimulation)
         !-----------------------------------------------------------------------------------------
 
     case(4)
-        CALL Info('CouplerSolver','Precice Finalize')
+        CALL Info('CouplerSolver','preCICE Finalize')
         CALL precicef_finalize()
 
         ! DEALLOCATE(writeData)
