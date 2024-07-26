@@ -70,6 +70,10 @@ model.mesh.generate(3)
 
 # Write the mesh to a file
 gmsh.write(path+"/Fluid_Participant_Mesh.msh")
+# write the mesh in stl format
+gmsh.option.setNumber('Mesh.StlOneSolidPerSurface', 2)
+gmsh.write(path+"/Fluid_Participant_Mesh.stl")
+
 
 gmsh.fltk.run()
 # Finalize GMSH

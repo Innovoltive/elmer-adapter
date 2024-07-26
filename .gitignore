@@ -35,3 +35,6 @@ Partitioned_Heat_Conduction/fenics
 # ignore log files
 *.log
 *.msh
+
+# ignore my own test files
+Flow_Over_Heated_Plate_test_*/
