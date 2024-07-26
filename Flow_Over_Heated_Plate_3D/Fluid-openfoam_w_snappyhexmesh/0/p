@@ -1,0 +1,43 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      p;
+}
+
+dimensions      [1 -1 -2 0 0 0 0];
+
+internalField   uniform 103500;
+
+boundaryField
+{
+
+    Inlet
+    {
+        type            calculated;
+        value           $internalField;
+    }
+
+    Outlet
+    {
+        type            calculated;
+        value           $internalField;
+    }
+
+    Fluid_Walls
+    {
+        type            calculated;
+        value           $internalField;
+    }
+    Coupling_Interface
+    {
+        type            calculated;
+        value           $internalField;
+    }
+
+    defaultFaces
+    {
+        type            empty;
+    }
+}

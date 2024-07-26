@@ -1,0 +1,35 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      epsilon;
+}
+
+dimensions      [0 2 -3 0 0 0 0];
+
+internalField   uniform 1e-6;
+
+boundaryField
+{
+    Inlet
+    {
+        type            fixedValue;
+        value           uniform 1e-6;
+    }
+    Outlet
+    {
+        type            fixedValue;
+        value           uniform 1e-6;
+    }
+    Fluid_Walls
+    {
+        type            fixedValue;
+        value           uniform 1e-6;
+    }
+    Coupling_Interface
+    {
+        type            fixedValue;
+        value           uniform 1e-6;
+    }
+}
