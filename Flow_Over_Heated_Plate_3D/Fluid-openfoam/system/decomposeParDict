@@ -1,16 +1,16 @@
-
-// * * * * * * * * * //
-FoamFile
-{
-	version 0.5;
-	format ascii;
-	root "ROOT";
-	case "CASE";
-	class dictionary;
-	object nix;
+FoamFile {
+    version 2.0;
+    class dictionary;
+    object decomposeParDict;
+    format ascii;
 }
-method scotch;
-numberOfSubdomains 8;
-scotchCoeffs
+
+numberOfSubdomains 2;
+
+method          simple;
+
+simpleCoeffs
 {
+    n           (2 1 1);
+    delta       0.001;
 }

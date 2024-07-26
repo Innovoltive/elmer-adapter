@@ -1,34 +1,49 @@
 FoamFile
 {
-	version	2.0;
-	format	binary;
-	class	volScalarField;
-	location	"0";
-	object	nut;
-	arch	"LSB;label=32;scalar=64";
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      nut;
 }
-dimensions	[0 2 -1 0 0 0 0];
-internalField	uniform 0.10000000149011612;
+
+dimensions      [ 0 2 -1 0 0 0 0 ];
+
+internalField   uniform 0;
+
 boundaryField
 {
-	Coupling_Interface
-	{
-		type	nutUWallFunction;
-		value	uniform 0.10000000149011612;
-	}
-	inlet
-	{
-		type	calculated;
-		value	uniform 0.10000000149011612;
-	}
-	outlet
-	{
-		type	calculated;
-		value	uniform 0.10000000149011612;
-	}
-	Fluid_Walls
-	{
-		type	nutUWallFunction;
-		value	uniform 0.10000000149011612;
-	}
+    interface
+    {
+        type            nutkWallFunction;
+        value           uniform 0;
+    }
+    inlet
+    {
+        type            nutkWallFunction;
+        value           uniform 0;
+    }
+    outlet
+    {
+        type            nutkWallFunction;
+        value           uniform 0;
+    }
+    top
+    {
+        type            nutkWallFunction;
+        value           uniform 0;
+    }
+    bottom
+    {
+        type            nutkWallFunction;
+        value           uniform 0;
+    }
+    slip-bottom
+    {
+        type            nutkWallFunction;
+        value           uniform 0;
+    }
+    defaultFaces
+    {
+        type            empty;
+    }
 }

@@ -1,31 +1,44 @@
 FoamFile
 {
-	version	2.0;
-	format	binary;
-	class	volScalarField;
-	location	"0";
-	object	p_rgh;
-	arch	"LSB;label=32;scalar=64";
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      p_rgh;
 }
-dimensions	[1 -1 -2 0 0 0 0];
-internalField	uniform 101325;
+
+dimensions      [ 1 -1 -2 0 0 0 0 ];
+
+internalField   uniform 103500;
+
 boundaryField
 {
-	Coupling_Interface
-	{
-		type	fixedFluxPressure;
-	}
-	inlet
-	{
-		type	fixedFluxPressure;
-	}
-	outlet
-	{
-		type	fixedValue;
-		value	uniform 101325;
-	}
-	Fluid_Walls
-	{
-		type	fixedFluxPressure;
-	}
+    interface
+    {
+        type            zeroGradient;
+    }
+    inlet
+    {
+        type            zeroGradient;
+    }
+    outlet
+    {
+        type            fixedValue;
+        value           $internalField;
+    }
+    top
+    {
+        type            zeroGradient;
+    }
+    slip-bottom
+    {
+        type            zeroGradient;
+    }
+    bottom
+    {
+        type            zeroGradient;
+    }
+    defaultFaces
+    {
+        type            empty;
+    }
 }

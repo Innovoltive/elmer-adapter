@@ -8,10 +8,15 @@ gmsh.initialize()
 # import a step file called solid.step
 # get the absolute path of the file
 gmsh.open(path+"/Solid_Participant_Mesh.step")
-volume = gmsh.model.getEntities(3)
+volumes = gmsh.model.getEntities(3)
 # add physical group
-gmsh.model.addPhysicalGroup(3, [volume[0][1]], tag=1, name="Plate")
-bbox = gmsh.model.getBoundingBox(3, volume[0][1])
+# remove vomume[0][1] from model
+gmsh.model.occ.remove([volumes[0]], recursive=True)
+gmsh.model.occ.synchronize()
+volumes = gmsh.model.getEntities(3)
+
+gmsh.model.addPhysicalGroup(3, [volumes[0][1]], tag=1, name="Plate")
+bbox = gmsh.model.getBoundingBox(3, volumes[0][1])
 xmin, ymin, zmin, xmax, ymax, zmax = round(bbox[0],3), round(bbox[1],3), round(bbox[2],3), round(bbox[3],3), round(bbox[4],3), round(bbox[5],3)
 # Create a new model
 model = gmsh.model
@@ -22,13 +27,13 @@ for s in surfaces:
     bbox = model.getBoundingBox(2, s[1])
     xmins, ymins, zmins, xmaxs, ymaxs, zmaxs = round(bbox[0],3), round(bbox[1],3), round(bbox[2],3), round(bbox[3],3), round(bbox[4],3), round(bbox[5],3)
     # get the top surface
-    if zmins == zmax and zmax == zmaxs:
+    if ymins == ymax and ymax == ymaxs:
         # add physical group
         model.addPhysicalGroup(2, [s[1]], tag=-1, name="Coupling_Interface")
         coupling_interface = s
         
     # get the bottom surface
-    elif zmins == zmin and zmaxs == zmin:
+    elif ymins == ymin and ymaxs == ymin:
         # add physical group
         model.addPhysicalGroup(2, [s[1]], tag=-1, name="Plate_Bottom")
     # get the walls
@@ -54,7 +59,7 @@ model.addPhysicalGroup(2, walls, tag=-1, name="Plate_Sides")
 # gmsh.model.mesh.field.setAsBackgroundMesh(th_f_interface)
 
 # limit the mesh size
-gmsh.option.setNumber("Mesh.MeshSizeMax", 0.5)
+gmsh.option.setNumber("Mesh.MeshSizeMax", 0.1)
 # Generate the mesh
 model.mesh.generate(3)
 

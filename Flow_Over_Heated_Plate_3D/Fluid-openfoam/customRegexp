@@ -1,5 +1,0 @@
-temperatureExtremes {
-expr "limitTemperature temperatureLimit Unlimited Tmax (%f%)";
-theTitle " Temperature ␣ Extremes ";
-titles (min max );
-}

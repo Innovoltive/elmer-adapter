@@ -1,34 +1,49 @@
 FoamFile
 {
-	version	2.0;
-	format	binary;
-	class	volScalarField;
-	location	"0";
-	object	k;
-	arch	"LSB;label=32;scalar=64";
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      k;
 }
-dimensions	[0 2 -2 0 0 0 0];
-internalField	uniform 0.009999999776482582;
+
+dimensions      [ 0 2 -2 0 0 0 0 ];
+
+internalField   uniform 0.1;
+
 boundaryField
 {
-	Coupling_Interface
-	{
-		type	kqRWallFunction;
-		value	uniform 0.009999999776482582;
-	}
-	inlet
-	{
-		type	turbulentIntensityKineticEnergyInlet;
-		value	uniform 0.009999999776482582;
-		intensity	0.05;
-	}
-	outlet
-	{
-		type	zeroGradient;
-	}
-	Fluid_Walls
-	{
-		type	kqRWallFunction;
-		value	uniform 0.009999999776482582;
-	}
+    interface
+    {
+        type            kqRWallFunction;
+        value           uniform 0.1;
+    }
+    inlet
+    {
+        type            kqRWallFunction;
+        value           uniform 0.1;
+    }
+    outlet
+    {
+        type            kqRWallFunction;
+        value           uniform 0.1;
+    }
+    top
+    {
+        type            kqRWallFunction;
+        value           uniform 0.1;
+    }
+    slip-bottom
+    {
+        type            kqRWallFunction;
+        value           uniform 0.1;
+    }
+    bottom
+    {
+        type            kqRWallFunction;
+        value           uniform 0.1;
+    }
+    defaultFaces
+    {
+        type            empty;
+    }
 }

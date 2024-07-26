@@ -14,8 +14,8 @@ Simulation
   Output Intervals = 1
   Timestepping Method = BDF
   BDF Order = 2
-  Timestep intervals = 500
-  Timestep Sizes = 0.5
+  Timestep intervals = 1000
+  Timestep Sizes = 0.01
   Solver Input File = case.sif
   Post File = Fluid.vtu
   Use Mesh Names = Logical True
@@ -27,7 +27,7 @@ Simulation
 End
 
 Constants
-  Gravity(4) = 0 0 -1 9.82
+  Gravity(4) = 0 -1 0 9.82
   Stefan Boltzmann = 5.67e-08
   Permittivity of Vacuum = 8.8542e-12
   Boltzmann Constant = 1.3807e-23

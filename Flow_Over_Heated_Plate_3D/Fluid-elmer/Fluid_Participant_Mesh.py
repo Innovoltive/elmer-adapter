@@ -37,7 +37,7 @@ for s in surfaces:
     elif xmaxs == xmax and xmins == xmax:
         # add physical group
         model.addPhysicalGroup(2, [s[1]], tag=-1, name="Outlet")
-    elif s[1] == 12:
+    elif s[1] == 10:
         # add physical group
         model.addPhysicalGroup(2, [s[1]], tag=-1, name="Coupling_Interface")
         coupling_interface = s
@@ -64,7 +64,7 @@ model.addPhysicalGroup(2, walls, tag=-1, name="Fluid_Walls")
 # gmsh.model.mesh.field.setAsBackgroundMesh(th_f_interface)
 
 # limit the mesh size
-gmsh.option.setNumber("Mesh.MeshSizeMax", 0.5)
+gmsh.option.setNumber("Mesh.MeshSizeMax", 0.1)
 # Generate the mesh
 model.mesh.generate(3)
 

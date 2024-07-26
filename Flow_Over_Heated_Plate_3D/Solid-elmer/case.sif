@@ -14,7 +14,7 @@ Simulation
   Output Intervals = 1
   Timestepping Method = BDF
   BDF Order = 2
-  Timestep intervals = 5000
+  Timestep intervals = 1000
   Timestep Sizes = 0.01
   Solver Input File = case.sif
   Post File = Solid.vtu
@@ -27,7 +27,7 @@ Simulation
 End
 
 Constants
-  Gravity(4) = 0 0 -1 9.82
+  Gravity(4) = 0 -1 0 9.82
   Stefan Boltzmann = 5.67e-08
   Permittivity of Vacuum = 8.8542e-12
   Boltzmann Constant = 1.3807e-23
@@ -138,7 +138,7 @@ End
 Boundary Condition 1
   !Target Boundaries(1) = 2
   Name = "Plate_Bottom"
-  Temperature = 301
+  Temperature = 350
 End
 
 Boundary Condition 2
