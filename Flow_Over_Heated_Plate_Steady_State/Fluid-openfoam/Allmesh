@@ -1,6 +1,0 @@
-#!/bin/sh
-./Allclean
-blockMesh
-surfaceFeatureExtract
-snappyHexMesh -overwrite
-paraFoam
