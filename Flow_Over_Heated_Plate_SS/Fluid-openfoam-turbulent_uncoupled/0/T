@@ -28,7 +28,7 @@ boundaryField
     interface
     {
         type            fixedGradient;
-        gradient        uniform 1000;
+        gradient        uniform 0;
     }
 
     top
