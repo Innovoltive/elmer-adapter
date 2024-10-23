@@ -246,8 +246,7 @@ SUBROUTINE CouplerSolver( Model,Solver,dt,TransientSimulation)
     Mesh => Solver % Mesh
     solverParams => GetSolverParams()
 
-    rank = 0
-    commsize = 1
+    
     !--------------------------Initialize-End-------------------------------------------
     !----Dirichlet
     ! vertecies = (/3,22,21,20,19,18,17,16,15,14,4/)
@@ -323,7 +322,11 @@ SUBROUTINE CouplerSolver( Model,Solver,dt,TransientSimulation)
         ! IF (participantName == "neumann") THEN
         !     rank =1
         ! END IF
-        
+        ! Get the rank and size of the communicator from the environment
+        CALL Info('CouplerSolver:','my rank is:'// I2S(ParEnv % MyPe), LEVEL=10)
+        CALL Info('CouplerSolver','commsize:'// I2S(ParEnv % PEs), LEVEL=10)
+        rank = ParEnv % MyPe
+        commSize = ParEnv % PEs
         CALL precicef_create(participantName, configPath, rank, commsize)
         
         writeInitialData(1:50)='                                                  '
