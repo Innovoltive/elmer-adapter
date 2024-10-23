@@ -5,11 +5,12 @@
 *.nodes
 *.names
 *.prof
-
+precice-profiling/
 # ignoring binary files
 *.out
 *.so
 *.mod
+
 
 # ignoring precice log files
 *events-summary.log
