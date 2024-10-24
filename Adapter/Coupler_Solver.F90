@@ -400,11 +400,12 @@ SUBROUTINE CouplerSolver( Model,Solver,dt,TransientSimulation)
         CALL Info('CouplerSolver','preCICE Finalize')
         CALL precicef_finalize()
 
-        ! DEALLOCATE(writeData)
-        ! DEALLOCATE(readData)
-        ! DEALLOCATE(vertexIDs)
-    case(5)
-        CALL Info('CouplerSolver ', 'Testing')
+        DEALLOCATE(writeData)
+        DEALLOCATE(readData)
+        DEALLOCATE(vertexIDs)
+        DEALLOCATE(CoordVals)
+        DEALLOCATE(BoundaryPerm)
+        
     end select
 
     CALL Info('CouplerSolver','Ended')

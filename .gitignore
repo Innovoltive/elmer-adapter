@@ -27,3 +27,5 @@ out/
 
 # ignoring a (potentially added) FEniCS case
 Partitioned_Heat_Conduction/fenics
+
+Flow_Over_Heated_Plate_3D/
