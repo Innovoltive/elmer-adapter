@@ -15,7 +15,7 @@ To build the adapter, navigate to the folder `Adapter` and run `make`. If Elmer 
 
 ## Use the adapter
 
-Examples for usage of the adapter can be found in the `Partitioned_Heat_Conduction/` folder and in the preCICE tutorial [flow-over-heated-plate](https://precice.org/tutorials-flow-over-heated-plate.html). For new users it is recommended to look at the tutorial case as a starting point.
+Examples for usage of the adapter can be found in the `Flow_Over_Heated_Plate` and `Partitioned_Heat_Conduction/` folders and in the preCICE tutorial [flow-over-heated-plate](https://precice.org/tutorials-flow-over-heated-plate.html). For new users it is recommended to look at the tutorial case as a starting point.
 
 ## How to couple your own code
 

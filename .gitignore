@@ -14,6 +14,7 @@
 # ignoring precice log files
 *events-summary.log
 *events.json
+*.log
 
 # ignoring specific sif file
 entities.sif
@@ -23,6 +24,7 @@ venv
 Results/
 build/
 out/
-
+Flow_Over_Heated_Plate/Fluid-elmer/precice-profiling/Fluid-0-1.json
+Flow_Over_Heated_Plate/Solid-elmer/precice-profiling/Solid-0-1.json
 # ignoring a (potentially added) FEniCS case
 Partitioned_Heat_Conduction/fenics
